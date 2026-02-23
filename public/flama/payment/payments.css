@@ -1,0 +1,7 @@
+:root {
+    --icon-payment-app:url("./payment/app.svg");
+    --icon-payment-cash:url("./payment/cash.svg");
+    --icon-payment-mastercard:url("./payment/mastercard.svg");
+    --icon-payment-qr:url("./payment/qr.svg");
+    --icon-payment-visa:url("./payment/visa.svg");
+}

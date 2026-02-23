@@ -1,0 +1,1910 @@
+/**
+ * Libreria de componentes con estándares de Banco Santander
+ *
+ * @author Diego Rodriguez <diego.rodriguez.gomez@gmail.com>
+ */
+@import url('./icon/icons.css');
+@import url('./payment/payments.css');
+:root {
+    --font:'Santander', sans-serif;
+    --font-size-big:24px;
+    --font-size:16px;
+    --font-size-xs:10px;
+    --font-size-small:12px;
+    --font-size-medium:14px;
+    --font-size-large:20px;
+    --font-size-xl:36px;
+
+    --color-clear:#FFFFFF;
+    --color-clear-border:#CEDEE7;
+    --color-clear-border-light:#CCCCCC;
+    --color-cleat-light:#F8FBFC;
+    --color-clear-text:#444444;
+    --color-clear-text-light:#767676;
+    --color-clear-text-secundary:#1BB3BC;
+
+    --color-solid:#ECECEC;
+    --color-solid-border:#ECECEC;
+    --color-solid-text:#767676;
+
+    --color-primary:#EC0000;
+    --color-primary-border:#EC0000;
+    --color-primary-text:#FFFFFF;
+
+    --color-hover:#CC0000;
+    --color-hover-border:#CC0000;
+    --color-hover-text:#FFFFFF;
+
+    --color-active:#990000;
+    --color-active-border:#990000;
+    --color-active-text:#FFFFFF;
+
+    --color-secundary:#137E84;
+    --color-secundary-border:#137E84;
+    --color-secundary-text:#FFFFFF;
+    --color-secundary-disabled:#767676;
+
+    --color-disabled:#F6F6F6;
+    --color-disabled-border:#CCCCCC;
+    --color-disabled-text:#767676;
+
+    --round-button-primary:100px;
+    --round-button:8px;
+    --round-card:10px;
+    --round-input:4px;
+    
+    --spacing:4px;
+    --spacing-check:10px;
+    --spacing-medium:8px;
+    --spacing-big:24px;
+    --spacing-paginator:30px;
+
+    --space-vertical:12px;
+    --space-vertical-button:14px;
+    --space-horizontal:16px;
+    --space-horizontal-button:24px;
+    --space-vertical-medium:12px;
+    --space-horizontal-medium:16px;
+    --space-vertical-small:8px;
+    --space-horizontal-small:12px;
+    --space-vertical-compact:4px;
+    --space-horizontal-compact:16px;
+
+    --border:1.2px;
+
+    --transition:0.3s;
+    --transition-fast:0.1s;
+
+    --spinner-big:158px;
+    --spinner-medium:120px;
+    --spinner-small:80px;
+
+    --loader-spacing:40px;
+    --loader-spinner:50px;
+
+    --card-spacing:24px;
+    --card-gap:20px;
+    --card-body-gap:12px;
+
+    --actions-size:40px;
+
+    --dark:#44444499;
+    --shadow:0 10px 15px rgba(0,0,0,0.14);
+
+    --avatar:44px;
+
+    --icon:24px;
+
+    --pay-method:32px;
+
+    --tip-spacing:16px;
+
+    --tag-active:#63BA6833;
+    --tag-active-border:#63BA68;
+    --tag-inactive:#6B6B6B33;
+    --tag-inactive-border:#6B6B6B;
+    --tag-admin:#0032E633;
+    --tag-admin-border:#0032E6;
+    --tag-local:#1BB3BC33;
+    --tag-local-border:#1BB3BC;
+
+    --error:#990000;
+    --error-background:#FEE5E5;
+    --correct:#3A8340;
+    --correct-background:#F0F8F0;
+    --warn:#946F00;
+    --warn-background:#FFFAEB;
+    --info:#23779A;
+    --info-background:#F5F9FB;
+
+    --row-gap:40px;
+
+    --menu:50px;
+    --menu-spacing:20px;
+    --menu-item-vertical:15px;
+    --menu-item-horizontal:16px;
+
+    --body-spacing-horizontal:40px;
+    --body-spacing-vertical:32px;
+
+    --table-header:#CCCCCC33;
+    --table-header-border:#CCCCCC;
+    --table-spacing-vertical:22px;
+    --table-spacing-vertical-compact:10px;
+    --table-spacing-horizontal:8px;
+    --table-odd:#DEEDF233;
+    --table-odd-border:#DEEDF2;
+
+    --auth-spacing-vertical:60px;
+    --auth-spacing-horizontal:80px;
+}
+
+body[flama] {
+    font:var(--font);
+    font-size:var(--font-size);
+    background:var(--color-clear);
+    color:var(--color-clear-text);
+    padding:0;
+    margin:0;
+    display:flex;
+    flex-direction:column;
+    width:100%;
+    height:100%;
+}
+html:has(> body[flama]){
+    height:100%;
+}
+
+fl-auth {
+    display:flex;
+    flex-direction:row;
+    flex:1;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+    fl-auth fl-auth-header {
+        display:flex;
+        flex:1;
+        background:no-repeat center center;
+        background-size:cover;
+        box-sizing:border-box;
+    }
+    fl-auth fl-auth-body {
+        display:flex;
+        flex-direction:column;
+        flex:1;
+        box-sizing:border-box;
+        padding:var(--auth-spacing-vertical) var(--auth-spacing-horizontal);
+    }
+        fl-auth fl-auth-body fl-auth-form {
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:flex-start;
+            flex:1
+        }
+        fl-auth fl-auth-body fl-auth-form[loading] {
+            position:relative
+        }
+        fl-auth fl-auth-body fl-auth-form[loading] > * {
+            opacity:0;
+            pointer-events:none;
+        }
+        fl-auth fl-auth-body fl-auth-form[loading]::before {
+            position:absolute;
+            left:50%;
+            top:50%;
+            width:var(--spinner-medium);
+            height:var(--spinner-medium);
+            margin-left:calc(var(--spinner-medium) * -0.5);
+            margin-top:calc(var(--spinner-medium) * -0.5);
+        }
+
+fl-body,
+[fl-body] {
+    display:flex;
+    flex-direction:column;
+    flex:1;
+    gap:var(--body-spacing-vertical);
+    overflow:auto;
+    padding:var(--body-spacing-horizontal) var(--body-spacing-vertical);
+}
+
+fl-body[compact],
+[fl-body][compact] {
+    padding-left:10%;
+    padding-right:10%;
+}
+
+fl-tabs {
+    display:flex;
+    flex-direction:row;
+    font-family:var(--font);
+    font-size:var(--font-size);
+}
+    fl-tabs > fl-tab,
+    fl-tabs > [fl-tab] {
+        display:flex;
+        flex-direction:row;
+        position:relative;
+        padding:var(--space-vertical-button) var(--space-horizontal-small);
+        cursor:pointer;
+    }
+        fl-tabs > fl-tab::before,
+        fl-tabs > [fl-tab]::before {
+            display:block;
+            content:"";
+            position:absolute;
+            left:50%;
+            right:50%;
+            bottom:0;
+            opacity:0;
+            background:var(--color-primary);
+            height:2px;
+            transition:var(--transition);
+        }
+        fl-tabs > fl-tab:hover::before,
+        fl-tabs > fl-tab[selected]::before,
+        fl-tabs > [fl-tab]:hover::before,
+        fl-tabs > [fl-tab][selected]::before {
+            left:0;
+            right:0;
+            opacity:1;
+        }
+
+table[flama] {
+    font-family:var(--font);
+    font-size:var(--font-size);
+    color:var(--color-clear-text);
+    width:100%;
+    border-collapse:collapse;
+}
+    table[flama] thead {
+        background-color:var(--table-header);
+        border-bottom:var(--border) solid var(--table-header-border);
+    }
+    table[flama] th {
+        text-align:left;
+        font-weight:bold;
+    }
+    table[flama] th[align=left]{
+        text-align:left;
+    }
+    table[flama] th[align=center]{
+        text-align:center;
+    }
+    table[flama] th[align=right]{
+        text-align:right;
+    }
+    table[flama] th,
+    table[flama] td {
+        padding:var(--table-spacing-vertical) var(--table-spacing-horizontal);
+    }
+    table[flama][compact] th,
+    table[flama][compact] td {
+        padding:var(--table-spacing-vertical-compact) 0;
+        background:none !important;
+    }
+    table[flama][compact] tbody tr {
+        border-bottom:none !important;
+    }
+    table[flama][compact] thead {
+        background:none;
+    }
+    table[flama] td {
+        color:var(--color-clear-text-light);
+    }
+    table[flama] th[align=right],
+    table[flama] td[align=right] {
+        text-align:right;
+    }
+    table[flama] tbody tr {
+        background:var(--color-clear);
+        border-bottom:var(--border) solid var(--table-odd-border);
+    }
+    table[flama] tbody tr:nth-child(odd) td {
+        background:var(--table-odd);
+    }
+
+fl-data {
+    display:inline-block;
+    font-family:var(--font);
+    font-size:var(--font-size-medium);
+    color:var(--color-clear-text);
+    font-weight:bold;
+    position:relative
+}
+    fl-data[inline] > * {
+        display:inline-block;
+    }
+    fl-data fl-data-label {
+        display:block;
+        color:var(--color-clear-text-light);
+        font-weight:normal;
+    }
+
+    fl-data[money] {
+        text-align:right;
+    }
+        fl-data[money] fl-data-label {
+            color:var(--color-clear-text-secundary);
+        }
+    
+    fl-data[method] {
+        padding-left:calc(var(--pay-method) + var(--spacing-medium));
+    }
+        fl-data[method]::before {
+            position:absolute;
+            left:0;
+            top:50%;
+            margin-top:calc(var(--pay-method) * -0.5);
+        }
+        fl-data[method=app]::before        { background-image:var(--icon-payment-app) !important; }
+        fl-data[method=cash]::before       { background-image:var(--icon-payment-cash) !important; }
+        fl-data[method=mastercard]::before { background-image:var(--icon-payment-mastercard) !important; }
+        fl-data[method=qr]::before         { background-image:var(--icon-payment-qr) !important; }
+        fl-data[method=visa]::before       { background-image:var(--icon-payment-visa) !important; }
+
+fl-payment,
+fl-data[method]::before {
+    display:inline-block;
+    content:"";
+    background:no-repeat center center;
+    width:var(--pay-method);
+    height:var(--pay-method);
+}
+    fl-payment[method=app]        { background-image:var(--icon-payment-app); }
+    fl-payment[method=cash]       { background-image:var(--icon-payment-cash); }
+    fl-payment[method=mastercard] { background-image:var(--icon-payment-mastercard); }
+    fl-payment[method=qr]         { background-image:var(--icon-payment-qr); }
+    fl-payment[method=visa]       { background-image:var(--icon-payment-visa); }
+
+fl-user {
+    display:flex;
+    flex-direction:column;
+    font-family:var(--font);
+    color:var(--color-clear-text);
+    padding-right:var(--spacing-medium);
+    border-right:var(--border) solid var(--color-clear-border-light);
+}
+    fl-user fl-user-label,
+    fl-user fl-user-name {
+        display:block;
+        width:100%;
+        text-align:right;
+    }
+    fl-user fl-user-label {
+        font-size:var(--font-size-small);
+    }
+    fl-user fl-user-name {
+        font-size:var(--font-size-medium);
+        font-weight:bold;
+    }
+
+fl-row {
+    display:flex;
+    flex-direction:row;
+    align-items:flex-start;
+    gap:var(--row-gap)
+}
+    fl-row[center] {
+        align-items:center;
+    }
+    fl-row > fl-col {
+        display:block;
+        flex:1
+    }
+    fl-row > fl-col[size="2"] { flex:2 }
+    fl-row > fl-col[size="3"] { flex:3 }
+    fl-row > fl-col[size="4"] { flex:4 }
+    fl-row > fl-col[size="5"] { flex:5 }
+    fl-row > fl-col[size="6"] { flex:6 }
+    fl-row > fl-col[fill] {
+        flex:1 !important
+    }
+    fl-row:has(> fl-col[fill]) > fl-col {
+        flex:unset
+    }
+
+fl-menu {
+    display:flex;
+    flex-direction:row;
+    background:var(--color-clear);
+    height:var(--menu);
+    align-items:center;
+    font-family:var(--font);
+    color:var(--color-clear-text);
+    gap:var(--menu-item-horizontal);
+    padding:10px var(--menu-spacing);
+}
+
+    fl-menu-items,
+    ul[flama] {
+        display:flex;
+        flex-direction:row;
+        height:100%;
+        flex:1
+    }
+        fl-menu-item,
+        fl-menu-items > a,
+        ul[flama] > * {
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            white-space:nowrap;
+            height:100%;
+            margin:0 var(--menu-item-horizontal);
+            font-weight:bold;
+            cursor:pointer;
+            position:relative;
+            user-select:none;
+            color:var(--color-clear-text);
+            text-decoration:none;
+        }
+        fl-menu-item::before,
+        fl-menu-items > a::before,
+        ul[flama] > *::before {
+            display:block;
+            content:"";
+            position:absolute;
+            left:50%;
+            right:50%;
+            bottom:0;
+            opacity:0;
+            background:var(--color-primary);
+            height:4px;
+            transition:var(--transition);
+        }
+        fl-menu-item:hover::before,
+        fl-menu-item[selected]::before,
+        fl-menu-items > a:hover::before,
+        fl-menu-items > a[selected]::before,
+        ul[flama] > *:hover::before,
+        ul[flama] > *[selected]::before {
+            left:0;
+            right:0;
+            opacity:1;
+        }
+        fl-menu-item[indicator]::after,
+        fl-menu-items > a[indicator]::after,
+        ul[flama] > *[indicator]::after {
+            display:block;
+            content:"";
+            width:10px;
+            height:var(--icon);
+            background:no-repeat center center var(--icon-chevron-down);
+            margin-left:var(--space-horizontal-medium);
+        }
+
+fl-breadcrumbs {
+    display:flex;
+    flex-direction:row;
+    font-family:var(--font);
+    font-size:var(--font-size-small);
+    gap:var(--spacing);
+}
+    fl-breadcrumbs > * {
+        position:relative;
+        display:flex;
+        flex-direction:row;
+        align-items:center;
+        color:var(--color-clear-text-light);
+        cursor:pointer;
+        user-select:none;
+    }
+    fl-breadcrumbs > *:hover {
+        text-decoration:underline;
+    }
+    fl-breadcrumbs > *::before {
+        display:block;
+        content:"";
+        width:6px;
+        height:6px;
+        border:1px solid var(--color-clear-text-light);
+        border-left:0;
+        border-top:0;
+        transform:rotate(-45deg);
+        margin-right:var(--spacing-check);
+    }
+    fl-breadcrumbs > *:first-child::before {
+        display:none;
+    }
+    fl-breadcrumbs > *:last-child {
+        color:var(--color-clear-text);
+        font-weight:bold;
+    }
+    fl-breadcrumbs > *:last-child::before {
+        border-color:var(--color-clear-text);
+    }
+    fl-breadcrumbs > *[back] {
+        font-weight:bold;
+        color:var(--color-primary);
+        font-size:var(--font-size-medium);
+    }
+    fl-breadcrumbs > *[back]:hover {
+        color:var(--color-hover);
+    }
+    fl-breadcrumbs > *[back]:active {
+        color:var(--color-active);
+    }
+    fl-breadcrumbs > *[back]::before {
+        display:block !important;
+        border-color:var(--color-primary);
+        transform:rotate(135deg);
+        border-width:2px;
+        margin-left:4px;
+    }
+
+fl-sections {
+    display:flex;
+    flex-direction:row;
+}
+    fl-sections > fl-section {
+        flex:1;
+        border-radius:0;
+        border-left-width:0;
+    }
+    fl-sections > fl-section:first-child {
+        border-radius:var(--round-button) 0 0 var(--round-button);
+        border-left-width:var(--border);
+    }
+    fl-sections > fl-section:last-child {
+        border-radius:0 var(--round-button) var(--round-button) 0;
+    }
+
+fl-section {
+    display:flex;
+    flex-direction:column;
+    border-radius:var(--round-button);
+    background-color:var(--color-clear);
+    border:var(--border) solid var(--color-clear-border);
+    padding:var(--spacing-big);
+    font-family:var(--font);
+    gap:var(--row-gap);
+}
+    fl-section[title] {
+        padding-top:0;
+    }
+
+    fl-section[title]::before {
+        display:block;
+        content:attr(title);
+        padding:var(--spacing-big);
+        margin-bottom:calc(var(--spacing-big) * -1);
+        background:var(--color-cleat-light);
+        color:var(--color-clear-text);
+        font-weight:bold;
+        font-size:var(--font-size-large);
+        border-top-left-radius: inherit;
+        border-top-right-radius: inherit;
+        margin-left: calc(var(--spacing-big) * -1);
+        margin-right: calc(var(--spacing-big) * -1);
+    }
+    fl-section:empty::before {
+        border-bottom-left-radius: inherit;
+        border-bottom-right-radius: inherit;
+    }
+    fl-section[clear],
+    fl-section[compact] {
+        padding:0;
+        border:0
+    }
+    fl-section[clear][title]::before,
+    fl-section[compact][title]::before {
+        padding:0;
+        background:none;
+        margin-left:0;
+        margin-top:0;
+        border-top-left-radius: unset;
+        border-top-right-radius: unset;
+    }
+    fl-section[compact][title]::before {
+        margin-bottom: calc(var(--row-gap) * -0.5);
+    }
+
+fl-dropbutton {
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    position:relative;
+    gap:var(--spacing);
+    font-family:var(--font);
+    font-size:var(--font-size);
+    background-color: var(--color-clear);
+    border:var(--border) solid var(--color-clear-border);
+    padding:var(--space-vertical-small) var(--space-horizontal-small);
+    border-radius:var(--round-button);
+    cursor:pointer;
+    user-select:none;
+}
+
+fl-dropbutton:hover {
+    border-color:var(--color-hover)
+}
+fl-dropbutton:active {
+    border-color:var(--color-active)
+}
+
+fl-tag {
+    display:inline-block;
+    border:var(--border) solid transparent;
+    box-sizing:border-box;
+    font-family:var(--font);
+    color:var(--color-clear-text);
+    border-radius:var(--round-button-primary);
+    padding:var(--space-vertical-compact) var(--space-horizontal-compact);
+    background:var(--tag-active);
+    border-color:var(--tag-active-border);
+    font-size:var(--font-size-small);
+    font-weight:bold;
+    min-width:95px;
+    text-align:center;
+    user-select:none;
+}
+    fl-tag[type=active] {
+        background:var(--tag-active);
+        border-color:var(--tag-active-border);
+    }
+    fl-tag[type=inactive] {
+        background:var(--tag-inactive);
+        border-color:var(--tag-inactive-border);
+    }
+    fl-tag[type=admin] {
+        background:var(--tag-admin);
+        border-color:var(--tag-admin-border);
+    }
+    fl-tag[type=local] {
+        background:var(--tag-local);
+        border-color:var(--tag-local-border);
+    }
+
+fl-paginator {
+    display:flex;
+    flex-direction:row;
+    gap:var(--spacing-paginator);
+    font-family:var(--font);
+    font-size:var(--font-size);
+    user-select:none;
+    align-items:center;
+}
+    fl-paginator > fl-paginator-move {
+        display:flex;
+        flex-direction:row;
+        color:var(--color-primary);
+        text-transform:uppercase;
+        font-weight:bold;
+        cursor:pointer;
+        align-items:center;
+        gap:var(--spacing)
+    }
+    fl-paginator > fl-paginator-move:hover {
+        color:var(--color-hover);
+    }
+    fl-paginator > fl-paginator-move:active {
+        color:var(--color-active);
+    }
+    fl-paginator > fl-paginator-move::after,
+    fl-paginator > fl-paginator-move::before {
+        display:none;
+        content:"";
+        width:var(--icon);
+        height:var(--icon);
+        background:no-repeat center center;
+    }
+    fl-paginator > fl-paginator-move:first-child::before {
+        display:block;
+        background-image:url('./icon/left-small/red.svg');
+    }
+    fl-paginator > fl-paginator-move:last-child::after {
+        display:block;
+        background-image:url('./icon/right-small/red.svg');
+    }
+    fl-paginator > fl-paginator-move[disabled] {
+        color:var(--color-disabled-text);
+        pointer-events:none;
+    }
+    fl-paginator > fl-paginator-move[disabled]:first-child::before {
+        background-image:url('./icon/left-small/disabled.svg');
+    }
+    fl-paginator > fl-paginator-move[disabled]:last-child::after {
+        background-image:url('./icon/right-small/disabled.svg');
+    }
+    fl-paginator > fl-pages {
+        display:flex;
+        flex-direction:row;
+    }
+        fl-paginator > fl-pages > fl-page {
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            min-width:var(--icon);
+            cursor:pointer;
+            color:var(--color-clear-text-light);
+        }
+        fl-paginator > fl-pages > fl-page[disabled] {
+            pointer-events:none;
+            color:var(--color-disabled-text);
+            opacity:0.5;
+        }
+        fl-paginator > fl-pages > fl-page[current] {
+            font-weight:bold;
+        }
+        fl-paginator > fl-pages > fl-page[current],
+        fl-paginator > fl-pages > fl-page:hover {
+            color:var(--color-clear-text);
+        }
+
+fl-checks {
+    display:flex;
+    flex-direction:row;
+    gap:var(--spacing-medium);
+    border-color:transparent !important;
+    padding-left:0 !important;
+    padding-right:0 !important;
+    position:relative
+}
+    fl-checks > label {
+        position: absolute;
+        line-height: 0;
+        left:0 !important;
+        pointer-events: none;
+        transition: var(--transition);
+        top: calc(var(--space-vertical) * 0.6);
+        font-size: var(--font-size-small);
+        white-space:nowrap;
+    }
+
+fl-check {
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    font-family:var(--font);
+    font-size:var(--font-size);
+    color:var(--color-clear-text);
+    user-select:none;
+}
+fl-check[disabled] {
+    color:var(--color-disabled-text);
+}
+fl-check[disabled] * {
+    pointer-events:none;
+}
+    fl-check > label {
+        display:flex;
+        flex-direction:row;
+        align-items:center;
+        white-space:nowrap;
+        cursor:pointer;
+        gap:var(--spacing-check);
+        position:relative;
+    }
+        fl-check > label::before {
+            display:block;
+            content:"";
+            width:var(--icon);
+            height:var(--icon);
+            border:2px solid var(--color-solid-text);
+            box-sizing:border-box;
+        }
+        fl-check[disabled] > label::before {
+            border-color:var(--color-disabled-border) !important;
+            background-color:var(--color-disabled) !important;
+        }
+        fl-check[disabled] > label::after {
+            border-color:var(--color-disabled-border) !important;
+        }
+        fl-check > label:has([type=checkbox])::before {
+            border-radius:var(--round-input);
+        }
+        fl-check > label:has([type=radio])::before {
+            border-radius:50%;
+        }
+        fl-check > label::after {
+            display:none;
+            content:"";
+            width:7px;
+            height:12px;
+            position:absolute;
+            left:calc( var(--icon) * 0.36 );
+            top:calc( var(--icon) * 0.19 );
+            transform:rotate(45deg);
+            border:2px solid var(--color-primary);
+            border-top:0;
+            border-left:0;
+            box-sizing:border-box;
+        }
+        fl-check:has(input:checked) > label::before,
+        fl-check:hover > label::before {
+            border-color:var(--color-primary);
+        }
+        fl-check:has(input:checked) > label::after {
+            display:block;
+        }
+        fl-check > label > input {
+            position:absolute;
+            opacity:0;
+            pointer-events:none;
+        }
+
+fl-nav {
+    display:flex;
+    flex-direction:column;
+    position:absolute;
+    left:0;
+    top:100%;
+    background-color:var(--color-clear);
+    z-index:1000;
+    border-radius:var(--round-input);
+    box-shadow:var(--shadow);
+    transition:var(--transition);
+    opacity:0;
+    pointer-events:none;
+}
+
+    *:focus > fl-nav,
+    fl-nav-item:hover > fl-nav,
+    fl-nav[visible] {
+        opacity:1;
+        pointer-events:all;
+    }
+
+    fl-nav-item {
+        display:flex;
+        flex-direction:row;
+        align-items:center;
+        position:relative;
+        padding:var(--space-vertical-medium) var(--space-horizontal-medium);
+        border-bottom:var(--border) solid var(--color-clear-border);
+        color:var(--color-clear-text);
+        min-height:var(--icon);
+        white-space:nowrap;
+        gap:var(--spacing);
+        min-width:300px;
+        justify-content:space-between;
+        transition:var(--transition-fast);
+    }
+    [headed] > fl-nav-item {
+        border-bottom:none;
+    }
+    [headed] > fl-nav-item:first-child {
+        border-bottom:var(--border) solid var(--color-clear-border);;
+    }
+    fl-nav-item:first-child {
+        border-top-left-radius:inherit;
+        border-top-right-radius:inherit;
+    }
+    fl-nav-item:last-child {
+        border-bottom-left-radius:inherit;
+        border-bottom-right-radius:inherit;
+        border-bottom:none;
+    }
+    fl-nav-item:hover {
+        background-color:#eee;
+    }
+    fl-nav-item[indicator]::after,
+    fl-nav-item:has(> fl-nav)::after {
+        display:block;
+        content:"";
+        width:var(--icon);
+        height:var(--icon);
+        background:no-repeat center center url('./icon/right/red.svg');
+    }
+        fl-nav-item > fl-nav {
+            left:100%;
+            top:0;
+        }
+        fl-nav-item > fl-buttons {
+            margin:calc(var(--spacing) * -1);
+        }
+    fl-nav-item[type=button] {
+        margin:0 var(--spacing);
+        border-bottom:none;
+        color:var(--color-primary);
+        cursor:pointer;
+        border-radius:var(--round-input);
+        padding:var(--space-vertical-small) var(--space-horizontal-small);
+        user-select:none;
+    }
+    fl-nav-item[type=button]:first-child {
+        margin-top:var(--spacing);
+    }
+    fl-nav-item[type=button]:last-child {
+        margin-bottom:var(--spacing);
+    }
+        fl-nav-item[type=button]:hover,
+        fl-nav-item[selected] {
+            background-color:var(--color-primary);
+            color:var(--color-primary-text);
+        }
+        fl-nav-item[type=button]:active {
+            background-color:var(--color-active);
+            color:var(--color-active-text);
+        }
+
+fl-tip {
+    display:none;
+    flex-direction:row;
+    align-items:center;
+    gap:var(--spacing);
+    background:var(--correct-background);
+    border:var(--border) solid var(--correct);
+    border-radius:var(--round-input);
+    padding:var(--tip-spacing);
+    font-family:var(--font);
+    font-size:var(--font-size);
+}
+    fl-tip[visible] {
+        display:flex;
+    }
+    fl-tip::before {
+        display:block;
+        background:no-repeat center center url('./tip/correct.svg');
+        width:var(--icon);
+        height:var(--icon);
+        content:"";
+    }
+    fl-tip[type=error] {
+        background:var(--error-background);
+        border-color:var(--error);
+    }
+        fl-tip[type=error]::before {
+            background-image:url('./tip/error.svg');
+        }
+    fl-tip[type=correct] {
+        background:var(--correct-background);
+        border-color:var(--correct);
+    }
+        fl-tip[type=correct]::before {
+            background-image:url('./tip/correct.svg');
+        }
+    fl-tip[type=warn] {
+        background:var(--warn-background);
+        border-color:var(--warn);
+    }
+        fl-tip[type=warn]::before {
+            background-image:url('./tip/warn.svg');
+        }
+    fl-tip[type=info] {
+        background:var(--info-background);
+        border-color:var(--info);
+    }
+        fl-tip[type=info]::before {
+            background-image:url('./tip/info.svg');
+        }
+
+fl-card {
+    display:flex;
+    flex-direction:column;
+    background-color:var(--color-clear);
+    border:var(--border) solid var(--color-clear);
+    color:var(--color-clear-text);
+    border-radius:var(--round-card);
+    padding:var(--card-spacing);
+    gap:var(--card-gap)
+}
+fl-card[message] {
+    max-width:500px;
+}
+fl-card[compact],
+fl-section > fl-card {
+    padding:0;
+}
+    fl-card > * {
+        text-align: center;
+    }
+    fl-card[align=left] > * {
+        text-align: left;
+    }
+    fl-card[align=right] > * {
+        text-align: right;
+    }
+    fl-card fl-card-body {
+        display:flex;
+        flex-direction:column;
+        gap:var(--card-body-gap)
+    }
+        fl-card img:first-child {
+            height:140px;
+            margin:0 auto;
+        }
+        fl-card[align=left] img:first-child {
+            margin:0 auto 0 0;
+        }
+        fl-card[align=right] img:first-child {
+            margin:0 0 0 auto;
+        }
+        fl-card fl-card-title {
+            display:block;
+            font-size:var(--font-size-big);
+            font-weight:bold;
+        }
+        fl-card fl-card-title[secundary] {
+            color:var(--color-clear-text-secundary);
+        }
+        fl-card fl-card-message {
+            display:block;
+        }
+        fl-card fl-card-description {
+            display:block;
+            color:var(--color-clear-text-light);
+            font-size:var(--font-size-medium);
+        }
+            fl-card fl-card-description > a {
+                color:var(--color-primary);
+                cursor:pointer;
+            }
+            fl-card fl-card-description > a:hover {
+                color:var(--color-hover);
+            }
+            fl-card fl-card-description > a:active {
+                color:var(--color-active);
+            }
+
+
+fl-loader,
+fl-modal {
+    display:none;
+    align-items:center;
+    justify-content:center;
+    position:fixed;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    flex-direction:column;
+    background-color:var(--dark);
+    font-family:var(--font);
+    font-size:var(--font-size);
+}
+fl-loader {
+    display:none;
+    z-index: 10000000;
+}
+fl-modal {
+    z-index: 1000000;
+}
+fl-modal[visible],
+fl-loader[visible] {
+    display:flex;
+}
+    fl-loader::after {
+        display:block;
+        content:"Por favor espere...";
+        background-color:var(--color-clear);
+        border-radius:var(--round-button);
+        padding:var(--loader-spacing);
+        padding-top:calc(var(--spinner-small) + var(--loader-spacing));
+        min-width:calc(var(--loader-spinner) * 2);
+        text-align:center;
+        box-shadow:var(--shadow);
+    }
+    fl-loader[message]::after {
+        content:attr(message);
+    }
+    fl-loader::before {
+        position:absolute;
+        left:50%;
+        right:50%;
+        width:var(--loader-spinner) !important;
+        height:var(--loader-spinner) !important;
+        margin-left:calc(var(--loader-spinner) * -0.5);
+        margin-top:calc(var(--loader-spinner) * -0.8);
+    }
+
+fl-loader::before,
+fl-spinner,
+fl-auth fl-auth-body fl-auth-form[loading]::before {
+    display:block;
+    content:"";
+    width:var(--spinner-big);
+    height:var(--spinner-big);
+    background:no-repeat center center url('./spinner/normal.svg');
+    background-size:cover;
+    animation:fl-spin 1s linear infinite;
+}
+    @keyframes fl-spin {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    fl-spinner[size=medium] {
+        width:var(--spinner-medium);
+        height:var(--spinner-medium);
+    }
+    fl-spinner[size=small] {
+        width:var(--spinner-small);
+        height:var(--spinner-small)
+    }
+
+fl-actions {
+    display:flex;
+    flex-direction:row;
+    gap:var(--spacing-big) 
+}
+
+fl-input, 
+fl-input *,
+fl-action,
+fl-action * {
+    font-family:var(--font);
+    font-size:var(--font-size);
+}
+
+fl-input {
+    display:flex;
+    flex-direction:row;
+    position:relative
+}
+
+    fl-input > label {
+        position:absolute;
+        line-height:0;
+        left:var(--space-horizontal);
+        pointer-events:none;
+        transition:var(--transition);
+        top:calc(var(--space-vertical) * 1.2);
+        font-size:var(--font-size-small);
+    }
+
+    fl-input[compact] > input,
+    fl-input[compact] > fl-select {
+        padding-top:var(--space-vertical-compact) !important;
+        padding-bottom:var(--space-vertical-compact) !important;
+    }
+    fl-input[compact] > label {
+        display:none;
+    }
+
+    fl-input select {
+        position:absolute;
+        left:0;
+        right:0;
+        top:0;
+        bottom:0;
+        opacity:0;
+        width:100%;
+        height:100%;
+        padding:0;
+    }
+
+    fl-input input,
+    fl-input fl-select,
+    fl-checks {
+        background-color:var(--color-clear);
+        border:var(--border) solid var(--color-clear-border);
+        border-radius:var(--round-input) var(--round-input) 0 0;
+        border-bottom:var(--border) solid var(--color-secundary);
+        transition:var(--transition);
+        color:var(--color-clear-text);
+        padding-left:calc(var(--space-horizontal) - var(--border));
+        padding-right:calc(var(--space-horizontal) - var(--border));
+        padding-top:calc(var(--space-vertical) * 1.8);
+        padding-bottom:calc(var(--space-vertical) * 0.2);
+        width:100%;
+        text-align:left;
+        height:calc(var(--font-size) * 1.6);
+    }
+
+    fl-input fl-select {
+        cursor:pointer;
+    }
+    
+    fl-input fl-select:empty::after {
+        display:inline-block;
+        content:"Seleccione una opción";
+    }
+    fl-input fl-select[placeholder]:empty::after {
+        content:attr(placeholder)
+    }
+
+    fl-input:has(> input:placeholder-shown) > label {
+        top:50%;
+        font-size:var(--font-size);
+    }
+    fl-input > input:placeholder-shown {
+        padding-top:var(--space-vertical);
+        padding-bottom:var(--space-vertical);
+    }
+
+    fl-input[error] {
+        margin-bottom:calc(var(--spacing) + var(--font-size-small));
+    }
+        fl-input[error]::after {
+            display:block;
+            content:attr(error);
+            position:absolute;
+            left:0;
+            width:100%;
+            top:100%;
+            color:var(--color-active);
+            margin-top:var(--spacing);
+            font-size:var(--font-size-small);
+            overflow:hidden;
+            text-overflow:ellipsis;
+        }
+        fl-input[error] input {
+            border-bottom-color:var(--color-active);
+        }
+
+    fl-input[disabled] {}
+        fl-input[disabled]::after {}
+        fl-input[disabled] > * {
+            pointer-events:none !important;
+            user-select:none;
+        }
+        fl-input[disabled] > input {
+            background-color:var(--color-disabled);
+            border-color:var(--color-disabled-border);
+            border-bottom-color:var(--color-secundary-disabled);
+        }
+        fl-input[disabled] > * {
+            color:var(--color-disabled-text)
+        }
+    
+    fl-input > fl-icon,
+    fl-input[icon]::before {
+        position:absolute;
+        left:var(--space-horizontal);
+        top:50%;
+        margin-top:calc(var(--icon) * -0.5);
+        margin-left:calc(var(--icon) * -0.25);
+    }
+        fl-input:has(> fl-icon) > label,
+        fl-input[icon] > label {
+            left:calc(var(--space-horizontal) + var(--icon) + var(--spacing));
+        }
+        fl-input:has(> fl-icon) > input,
+        fl-input:has(> fl-icon) > fl-select,
+        fl-input[icon] > input,
+        fl-input[icon] > fl-select {
+            padding-left:calc(var(--space-horizontal) + var(--icon) + var(--spacing) - var(--border));
+        }
+    
+    fl-input > fl-clear {
+        display:none;
+    }
+    fl-input:has(input:not(:placeholder-shown)) > fl-clear,
+    fl-input:has(input) > fl-visibility,
+    fl-input:has(>input[type=date])::after,
+    fl-input:has(>fl-select)::after {
+        display:block;
+        position:absolute;
+        right:var(--space-horizontal);
+        top:50%;
+        margin-top:calc(var(--icon) * -0.5);
+        margin-right:calc(var(--icon) * -0.25);
+    }
+    fl-input:has(input) > fl-visibility {
+        background-image:var(--icon-redable-grey);
+    }
+    fl-input:has(input[type=password]) > fl-visibility {
+        background-image:var(--icon-redable-no-grey);
+    }
+        fl-input:has(input:not(:placeholder-shown)):has(> fl-clear) > label {
+            right:calc(var(--space-horizontal) + var(--icon) + var(--spacing));
+        }
+        fl-input:has(input:not(:placeholder-shown)):has(> fl-clear) > input,
+        fl-input:has(input):has(> fl-visibility) > input,
+        fl-input > input[type=date],
+        fl-input > fl-select  {
+            padding-right:calc(var(--space-horizontal) + var(--icon) + var(--spacing) - var(--border));
+        }
+
+    fl-button,
+    button[flama],
+    a[flama],
+    [type=submit][flama] {
+        display:flex;
+        flex-direction:row;
+        background-color:var(--color-primary);
+        border:var(--border) solid var(--color-primary);
+        color:var(--color-primary-text);
+        border-radius:var(--round-button-primary);
+        align-items:center;
+        justify-content:center;
+        gap:var(--spacing);
+        padding:var(--space-vertical) var(--space-horizontal-button);
+        user-select:none;
+        cursor:pointer;
+        font-family:var(--font);
+        font-size:var(--font-size);
+        transition:var(--transition-fast);
+        font-weight:bold;
+        box-sizing:border-box;
+    }
+        fl-button[small],
+        button[flama][small],
+        a[flama][small],
+        [type=submit][flama][small] {
+            padding:var(--space-vertical-small) var(--space-horizontal-button);
+        }
+        fl-button[compact],
+        button[flama][compact],
+        a[flama][compact],
+        [type=submit][flama][compact] {
+            padding:var(--space-vertical-compact) var(--space-horizontal-button);
+        }
+        fl-button[pill],
+        fl-button[left],
+        button[flama][pill],
+        button[flama][left],
+        a[flama][pill],
+        a[flama][left],
+        [type=submit][flama][pill],
+        [type=submit][flama][left] {
+            align-self: flex-start;
+        }
+        fl-button[right],
+        button[flama][right],
+        a[flama][right],
+        [type=submit][flama][right] {
+            align-self: flex-end;
+        }
+        fl-button:hover,
+        button[flama]:hover,
+        a[flama]:hover,
+        [type=submit][flama]:hover {
+            background-color:var(--color-hover);
+            border-color:var(--color-hover-border);
+            color:var(--color-hover-text);
+        }
+        fl-button:active,
+        button[flama]:active,
+        a[flama]:active,
+        [type=submit][flama]:active {
+            background-color:var(--color-active);
+            border-color:var(--color-active-border);
+            color:var(--color-active-text);
+        
+        }
+        fl-button *,
+        button[flama] *,
+        a[flama] * {
+            pointer-events:none;
+            font-family:var(--font);
+        }
+        fl-button[clear],
+        fl-button[clear][disabled],
+        fl-button[outline],
+        fl-button[outline][disabled],
+        button[flama][clear],
+        button[flama][clear][disabled],
+        button[flama][outline],
+        button[flama][outline][disabled],
+        a[flama][clear],
+        a[flama][clear][disabled],
+        a[flama][outline],
+        a[flama][outline][disabled],
+        [type=submit][flama][clear],
+        [type=submit][flama][clear][disabled],
+        [type=submit][flama][outline],
+        [type=submit][flama][outline][disabled] {
+            background-color:transparent !important;
+        }
+        fl-button[clear],
+        button[flama][clear],
+        a[flama][clear],
+        [type=submit][flama][clear] {
+            border-color:transparent !important;
+            padding-left:0 !important;
+            padding-right:0 !important;
+            color:var(--color-clear-text-light);
+            font-weight:normal;
+        }
+        fl-button[clear]:hover,
+        button[flama][clear]:hover,
+        a[flama][clear]:hover,
+        [type=submit][flama][clear]:hover {
+            color:var(--color-hover);
+        }
+        fl-button[clear]:active,
+        button[flama][clear]:active,
+        article[flama][clear]:active,
+        [type=submit][flama][clear]:active {
+            color:var(--color-active);
+        }
+        fl-button[outline],
+        button[flama][outline],
+        a[flama][outline],
+        [type=submit][flama][outline] {
+            color:var(--color-primary-border);
+        }
+        fl-button[outline]:hover,
+        button[flama][outline]:hover,
+        a[flama][outline]:hover,
+        [type=submit][flama][outline]:hover {
+            color:var(--color-hover-border);
+        }
+        fl-button[outline]:active,
+        button[flama][outline]:active,
+        a[flama][outline]:active,
+        [type=submit][flama][outline]:active {
+            color:var(--color-active-border);
+        }
+        fl-button[clear][primary],
+        button[flama][clear][primary],
+        a[flama][clear][primary],
+        [type=submit][flama][clear][primary] {
+            color:var(--color-primary);
+        }
+        fl-button[clear][primary]:hover,
+        button[flama][clear][primary]:hover,
+        a[flama][clear][primary]:hover,
+        [type=submit][flama][clear][primary]:hover {
+            color:var(--color-hover);
+        }
+        fl-button[clear][primary]:active,
+        button[flama][clear][primary]:active,
+        a[flama][clear][primary]:active,
+        [type=submit][flama][clear][primary]:active {
+            color:var(--color-active);
+        }
+
+        fl-button[disabled],
+        fl-button[outline][disabled],
+        button[flama][disabled],
+        button[flama][outline][disabled],
+        a[flama][disabled],
+        a[flama][outline][disabled],
+        [type=submit][flama][disabled],
+        [type=submit][flama][outline][disabled] {
+            background-color:var(--color-disabled);
+            border-color:var(--color-disabled);
+            color:var(--color-disabled-text);
+            pointer-events:none;
+        }
+
+    fl-buttons {
+        flex:1;
+        width:100%;
+        display:flex;
+        flex-direction:row;
+        gap:var(--space-horizontal-button);
+    }
+        fl-buttons > fl-button,
+        fl-buttons > button[flama],
+        fl-buttons > a[flama],
+        fl-buttons > [type=submit][flama] {
+            flex:1
+        }
+        fl-buttons[center] {
+            justify-content:center;
+        }
+        fl-buttons[separate] {
+            justify-content:space-between;
+        }
+        fl-buttons[center] > fl-button,
+        fl-buttons[separate] > fl-button,
+        fl-buttons[center] > button[flama],
+        fl-buttons[separate] > button[flama],
+        fl-buttons[center] > a[flama],
+        fl-buttons[separate] > a[flama],
+        fl-buttons[center] > [type=submit][flama],
+        fl-buttons[separate] > [type=submit][flama] {
+            flex:unset;
+        }
+        fl-buttons[vertical] {
+            flex-direction:column;
+            gap:var(--space-vertical-button);
+        }
+
+    fl-action {
+        display:flex;
+        position:relative;
+        align-items:center;
+        justify-content:center;
+        cursor:pointer;
+        border-radius:50%;
+        width:var(--actions-size);
+        height:var(--actions-size);
+        box-sizing:border-box;
+        border:var(--border) solid var(--color-primary)
+    }
+        fl-action[disabled] {
+            border-color:var(--color-disabled-text);
+            pointer-events:none;
+            user-select:none;
+        }
+        fl-action[main] {
+            border-color:transparent;
+            user-select:none;
+        }
+        fl-action[main]:hover {
+            border-color:var(--color-clear-border-light);
+        }
+        fl-action[main]:active {
+            border-color:var(--color-clear-border);
+        }
+        fl-action[badge]::before {
+            display:block;
+            position:absolute;
+            right:-5px;
+            top:-5px;
+            text-align:center;
+            content:attr(badge);
+            font-size:var(--font-size-xs);
+            background:var(--color-primary);
+            color:var(--color-primary-text);
+            line-height:0;
+            padding:var(--font-size-xs) calc(var(--font-size-xs) * 0.6);
+            min-width:calc(var(--font-size-xs) * 0.8);
+            border-radius:100px;
+        }
+        fl-action[avatar] {
+            border-color:var(--color-primary-border);
+            background:no-repeat center center var(--color-primary);
+            background-size:cover;
+            color:var(--color-primary-text);
+            text-align:center;
+            text-transform:uppercase;
+            font-weight:bold;
+            justify-content:center;
+            align-items:center;
+            user-select:none;
+        }
+        fl-action[avatar]::after {
+            display:none;
+        }
+        fl-action[avatar]:hover {
+            border-color:var(--color-hover-border);
+            background-color:var(--color-hover);
+            color:var(--color-hover-text);
+        }
+        fl-action[avatar]:active {
+            border-color:var(--color-active-border);
+            background-color:var(--color-active);
+            color:var(--color-active-text);
+        }
+
+    fl-icon,
+    fl-clear,
+    fl-visibility,
+    fl-input[icon]::before,
+    fl-input:has(>input[type=date])::after,
+    fl-input:has(>fl-select)::after,
+    fl-action::after {
+        display:block;
+        content:"";
+        width:var(--icon);
+        height:var(--icon);
+        background:no-repeat center center;
+    }
+    fl-icon,
+    fl-input[icon]::before,
+    fl-input:has(>input[type=date])::after,
+    fl-input:has(>fl-select)::after,
+    fl-action::after {
+        pointer-events:none;
+    }
+    fl-clear,
+    fl-visibility {
+        cursor: pointer;
+    }
+        fl-clear { background-image:var(--icon-clear-grey); }
+        fl-input:has(>input[type=date])::after,
+        fl-input:has(>fl-select)::after { background-image:var(--icon-down-small); }
+        button[flama][outline] > fl-icon[icon=add],          a[flama][outline] > fl-icon[icon=add],          fl-button[outline] > fl-icon[icon=add],         fl-input[icon=add]::before,         fl-icon[icon=add],      fl-action[icon=add]::after      { background-image:var(--icon-add);      }
+        button[flama][outline] > fl-icon[icon=calendar],     a[flama][outline] > fl-icon[icon=calendar],     fl-button[outline] > fl-icon[icon=calendar],    fl-input[icon=calendar]::before,    fl-icon[icon=calendar], fl-action[icon=calendar]::after { background-image:var(--icon-calendar); }
+        button[flama][outline] > fl-icon[icon=cog],          a[flama][outline] > fl-icon[icon=cog],          fl-button[outline] > fl-icon[icon=cog],         fl-input[icon=cog]::before,         fl-icon[icon=cog],      fl-action[icon=cog]::after      { background-image:var(--icon-cog);      }
+        button[flama][outline] > fl-icon[icon=delete],       a[flama][outline] > fl-icon[icon=delete],       fl-button[outline] > fl-icon[icon=delete],      fl-input[icon=delete]::before,      fl-icon[icon=delete],   fl-action[icon=delete]::after   { background-image:var(--icon-delete);   }
+        button[flama][outline] > fl-icon[icon=dots],         a[flama][outline] > fl-icon[icon=dots],         fl-button[outline] > fl-icon[icon=dots],        fl-input[icon=dots]::before,        fl-icon[icon=dots],     fl-action[icon=dots]::after     { background-image:var(--icon-dots);     }
+        button[flama][outline] > fl-icon[icon=docs],         a[flama][outline] > fl-icon[icon=docs],         fl-button[outline] > fl-icon[icon=docs],        fl-input[icon=docs]::before,        fl-icon[icon=docs],     fl-action[icon=docs]::after     { background-image:var(--icon-docs);     }
+        button[flama][outline] > fl-icon[icon=download],     a[flama][outline] > fl-icon[icon=download],     fl-button[outline] > fl-icon[icon=download],    fl-input[icon=download]::before,    fl-icon[icon=download], fl-action[icon=download]::after { background-image:var(--icon-download); }
+        button[flama][outline] > fl-icon[icon=email],        a[flama][outline] > fl-icon[icon=email],        fl-button[outline] > fl-icon[icon=email],       fl-input[icon=email]::before,       fl-icon[icon=email],    fl-action[icon=email]::after    { background-image:var(--icon-email);    }
+        button[flama][outline] > fl-icon[icon=eye-no],       a[flama][outline] > fl-icon[icon=eye-no],       fl-button[outline] > fl-icon[icon=eye-no],      fl-input[icon=eye-no]::before,      fl-icon[icon=eye-no],   fl-action[icon=eye-no]::after   { background-image:var(--icon-eye-no);   }
+        button[flama][outline] > fl-icon[icon=eye],          a[flama][outline] > fl-icon[icon=eye],          fl-button[outline] > fl-icon[icon=eye],         fl-input[icon=eye]::before,         fl-icon[icon=eye],      fl-action[icon=eye]::after      { background-image:var(--icon-eye);      }
+        button[flama][outline] > fl-icon[icon=filter],       a[flama][outline] > fl-icon[icon=filter],       fl-button[outline] > fl-icon[icon=filter],      fl-input[icon=filter]::before,      fl-icon[icon=filter],   fl-action[icon=filter]::after   { background-image:var(--icon-filter);   }
+        button[flama][outline] > fl-icon[icon=lock],         a[flama][outline] > fl-icon[icon=lock],         fl-button[outline] > fl-icon[icon=lock],        fl-input[icon=lock]::before,        fl-icon[icon=lock],     fl-action[icon=lock]::after     { background-image:var(--icon-lock);     }
+        button[flama][outline] > fl-icon[icon=trash],        a[flama][outline] > fl-icon[icon=trash],        fl-button[outline] > fl-icon[icon=trash],       fl-input[icon=trash]::before,       fl-icon[icon=trash],    fl-action[icon=trash]::after    { background-image:var(--icon-trash);    }
+        button[flama][outline] > fl-icon[icon=update],       a[flama][outline] > fl-icon[icon=update],       fl-button[outline] > fl-icon[icon=update],      fl-input[icon=update]::before,      fl-icon[icon=update],   fl-action[icon=update]::after   { background-image:var(--icon-update);   }
+        button[flama][outline] > fl-icon[icon=user],         a[flama][outline] > fl-icon[icon=user],         fl-button[outline] > fl-icon[icon=user],        fl-input[icon=user]::before,        fl-icon[icon=user],     fl-action[icon=user]::after     { background-image:var(--icon-user);     }
+        button[flama][outline] > fl-icon[icon=up],           a[flama][outline] > fl-icon[icon=up],           fl-button[outline] > fl-icon[icon=up],          fl-input[icon=up]::before,          fl-icon[icon=up],       fl-action[icon=up]::after       { background-image:var(--icon-up);       }
+        button[flama][outline] > fl-icon[icon=down],         a[flama][outline] > fl-icon[icon=down],         fl-button[outline] > fl-icon[icon=down],        fl-input[icon=down]::before,        fl-icon[icon=down],     fl-action[icon=down]::after     { background-image:var(--icon-down);     }
+        button[flama][outline] > fl-icon[icon=left],         a[flama][outline] > fl-icon[icon=left],         fl-button[outline] > fl-icon[icon=left],        fl-input[icon=left]::before,        fl-icon[icon=left],     fl-action[icon=left]::after     { background-image:var(--icon-left);     }
+        button[flama][outline] > fl-icon[icon=right],        a[flama][outline] > fl-icon[icon=right],        fl-button[outline] > fl-icon[icon=right],       fl-input[icon=right]::before,       fl-icon[icon=right],    fl-action[icon=right]::after    { background-image:var(--icon-right);    }
+        button[flama][outline] > fl-icon[icon=up-small],     a[flama][outline] > fl-icon[icon=up-small],     fl-button[outline] > fl-icon[icon=up-small],    fl-input[icon=up-small]::before,    fl-icon[icon=up-small],    fl-action[icon=up-small]::after    { background-image:var(--icon-up-small);    }
+        button[flama][outline] > fl-icon[icon=down-small],   a[flama][outline] > fl-icon[icon=down-small],   fl-button[outline] > fl-icon[icon=down-small],  fl-input[icon=down-small]::before,  fl-icon[icon=down-small],  fl-action[icon=down-small]::after  { background-image:var(--icon-down-small);  }
+        button[flama][outline] > fl-icon[icon=left-small],   a[flama][outline] > fl-icon[icon=left-small],   fl-button[outline] > fl-icon[icon=left-small],  fl-input[icon=left-small]::before,  fl-icon[icon=left-small],  fl-action[icon=left-small]::after  { background-image:var(--icon-left-small);  }
+        button[flama][outline] > fl-icon[icon=right-small],  a[flama][outline] > fl-icon[icon=right-small],  fl-button[outline] > fl-icon[icon=right-small], fl-input[icon=right-small]::before, fl-icon[icon=right-small], fl-action[icon=right-small]::after { background-image:var(--icon-right-small); }
+        button[flama][outline] > fl-icon[icon=chevron-down], a[flama][outline] > fl-icon[icon=chevron-down], fl-button[outline] > fl-icon[icon=chevron-down], fl-input[icon=chevron-down]::before, fl-icon[icon=chevron-down], fl-action[icon=chevron-down]::after { background-image:var(--icon-chevron-down); }
+
+        fl-action[main][icon=add]::after,          button[flama][clear] > fl-icon[icon=add],          a[flama][clear] > fl-icon[icon=add],          fl-button[clear] > fl-icon[icon=add]         { background-image:var(--icon-add-grey);      }
+        fl-action[main][icon=calendar]::after,     button[flama][clear] > fl-icon[icon=calendar],     a[flama][clear] > fl-icon[icon=calendar],     fl-button[clear] > fl-icon[icon=calendar]    { background-image:var(--icon-calendar-grey); }
+        fl-action[main][icon=cog]::after,          button[flama][clear] > fl-icon[icon=cog],          a[flama][clear] > fl-icon[icon=cog],          fl-button[clear] > fl-icon[icon=cog]         { background-image:var(--icon-cog-grey);      }
+        fl-action[main][icon=delete]::after,       button[flama][clear] > fl-icon[icon=delete],       a[flama][clear] > fl-icon[icon=delete],       fl-button[clear] > fl-icon[icon=delete]      { background-image:var(--icon-delete-grey);   }
+        fl-action[main][icon=dots]::after,         button[flama][clear] > fl-icon[icon=dots],         a[flama][clear] > fl-icon[icon=dots],         fl-button[clear] > fl-icon[icon=dots]        { background-image:var(--icon-dots-grey);     }
+        fl-action[main][icon=docs]::after,         button[flama][clear] > fl-icon[icon=docs],         a[flama][clear] > fl-icon[icon=docs],         fl-button[clear] > fl-icon[icon=docs]        { background-image:var(--icon-docs-grey);     }
+        fl-action[main][icon=download]::after,     button[flama][clear] > fl-icon[icon=download],     a[flama][clear] > fl-icon[icon=download],     fl-button[clear] > fl-icon[icon=download]    { background-image:var(--icon-download-grey); }
+        fl-action[main][icon=email]::after,        button[flama][clear] > fl-icon[icon=email],        a[flama][clear] > fl-icon[icon=email],        fl-button[clear] > fl-icon[icon=email]       { background-image:var(--icon-email-grey);    }
+        fl-action[main][icon=eye-no]::after,       button[flama][clear] > fl-icon[icon=eye-no],       a[flama][clear] > fl-icon[icon=eye-no],       fl-button[clear] > fl-icon[icon=eye-no]      { background-image:var(--icon-eye-no-grey);   }
+        fl-action[main][icon=eye]::after,          button[flama][clear] > fl-icon[icon=eye],          a[flama][clear] > fl-icon[icon=eye],          fl-button[clear] > fl-icon[icon=eye]         { background-image:var(--icon-eye-grey);      }
+        fl-action[main][icon=filter]::after,       button[flama][clear] > fl-icon[icon=filter],       a[flama][clear] > fl-icon[icon=filter],       fl-button[clear] > fl-icon[icon=filter]      { background-image:var(--icon-filter-grey);   }
+        fl-action[main][icon=lock]::after,         button[flama][clear] > fl-icon[icon=lock],         a[flama][clear] > fl-icon[icon=lock],         fl-button[clear] > fl-icon[icon=lock]        { background-image:var(--icon-lock-grey);     }
+        fl-action[main][icon=trash]::after,        button[flama][clear] > fl-icon[icon=trash],        a[flama][clear] > fl-icon[icon=trash],        fl-button[clear] > fl-icon[icon=trash]       { background-image:var(--icon-trash-grey);    }
+        fl-action[main][icon=update]::after,       button[flama][clear] > fl-icon[icon=update],       a[flama][clear] > fl-icon[icon=update],       fl-button[clear] > fl-icon[icon=update]      { background-image:var(--icon-update-grey);   }
+        fl-action[main][icon=user]::after,         button[flama][clear] > fl-icon[icon=user],         a[flama][clear] > fl-icon[icon=user],         fl-button[clear] > fl-icon[icon=user]        { background-image:var(--icon-user-grey);     }
+        fl-action[main][icon=up]::after,           button[flama][clear] > fl-icon[icon=up],           a[flama][clear] > fl-icon[icon=up],           fl-button[clear] > fl-icon[icon=up]          { background-image:var(--icon-up-grey);       }
+        fl-action[main][icon=down]::after,         button[flama][clear] > fl-icon[icon=down],         a[flama][clear] > fl-icon[icon=down],         fl-button[clear] > fl-icon[icon=down]        { background-image:var(--icon-down-grey);     }
+        fl-action[main][icon=left]::after,         button[flama][clear] > fl-icon[icon=left],         a[flama][clear] > fl-icon[icon=left],         fl-button[clear] > fl-icon[icon=left]        { background-image:var(--icon-left-grey);     }
+        fl-action[main][icon=right]::after,        button[flama][clear] > fl-icon[icon=right],        a[flama][clear] > fl-icon[icon=right],        fl-button[clear] > fl-icon[icon=right]       { background-image:var(--icon-right-grey);    }
+        fl-action[main][icon=up-small]::after,     button[flama][clear] > fl-icon[icon=up-small],     a[flama][clear] > fl-icon[icon=up-small],     fl-button[clear] > fl-icon[icon=up-small]    { background-image:var(--icon-up-small-grey);    }
+        fl-action[main][icon=down-small]::after,   button[flama][clear] > fl-icon[icon=down-small],   a[flama][clear] > fl-icon[icon=down-small],   fl-button[clear] > fl-icon[icon=down-small]  { background-image:var(--icon-down-small-grey);  }
+        fl-action[main][icon=left-small]::after,   button[flama][clear] > fl-icon[icon=left-small],   a[flama][clear] > fl-icon[icon=left-small],   fl-button[clear] > fl-icon[icon=left-small]  { background-image:var(--icon-left-small-grey);  }
+        fl-action[main][icon=right-small]::after,  button[flama][clear] > fl-icon[icon=right-small],  a[flama][clear] > fl-icon[icon=right-small],  fl-button[clear] > fl-icon[icon=right-small] { background-image:var(--icon-right-small-grey); }
+        fl-action[main][icon=chevron-down]::after, button[flama][clear] > fl-icon[icon=chevron-down], a[flama][clear] > fl-icon[icon=chevron-down], fl-button[clear] > fl-icon[icon=chevron-down] { background-image:var(--icon-chevron-down-grey); }
+
+        fl-input[disabled]:has(>input[type=date])::after,
+        fl-input[disabled]:has(>fl-select)::after { background-image:var(--icon-down-small-disabled); }
+        button[flama][disabled] > fl-icon[icon=add],          a[flama][disabled] > fl-icon[icon=add],          fl-button[disabled] > fl-icon[icon=add],          fl-input[disabled][icon=add]::before,          fl-input[disabled] fl-icon[icon=add],          fl-icon[disabled][icon=add],          fl-action[disabled][icon=add]::after          { background-image:var(--icon-add-disabled);          }
+        button[flama][disabled] > fl-icon[icon=calendar],     a[flama][disabled] > fl-icon[icon=calendar],     fl-button[disabled] > fl-icon[icon=calendar],     fl-input[disabled][icon=calendar]::before,     fl-input[disabled] fl-icon[icon=calendar],     fl-icon[disabled][icon=calendar],     fl-action[disabled][icon=calendar]::after     { background-image:var(--icon-calendar-disabled);     }
+        button[flama][disabled] > fl-icon[icon=cog],          a[flama][disabled] > fl-icon[icon=cog],          fl-button[disabled] > fl-icon[icon=cog],          fl-input[disabled][icon=cog]::before,          fl-input[disabled] fl-icon[icon=cog],          fl-icon[disabled][icon=cog],          fl-action[disabled][icon=cog]::after          { background-image:var(--icon-cog-disabled);          }
+        button[flama][disabled] > fl-icon[icon=delete],       a[flama][disabled] > fl-icon[icon=delete],       fl-button[disabled] > fl-icon[icon=delete],       fl-input[disabled][icon=delete]::before,       fl-input[disabled] fl-icon[icon=delete],       fl-icon[disabled][icon=delete],       fl-action[disabled][icon=delete]::after       { background-image:var(--icon-delete-disabled);       }
+        button[flama][disabled] > fl-icon[icon=dots],         a[flama][disabled] > fl-icon[icon=dots],         fl-button[disabled] > fl-icon[icon=dots],         fl-input[disabled][icon=dots]::before,         fl-input[disabled] fl-icon[icon=dots],         fl-icon[disabled][icon=dots],         fl-action[disabled][icon=dots]::after         { background-image:var(--icon-dots-disabled);         }
+        button[flama][disabled] > fl-icon[icon=docs],         a[flama][disabled] > fl-icon[icon=docs],         fl-button[disabled] > fl-icon[icon=docs],         fl-input[disabled][icon=docs]::before,         fl-input[disabled] fl-icon[icon=docs],         fl-icon[disabled][icon=docs],         fl-action[disabled][icon=docs]::after         { background-image:var(--icon-docs-disabled);         }
+        button[flama][disabled] > fl-icon[icon=download],     a[flama][disabled] > fl-icon[icon=download],     fl-button[disabled] > fl-icon[icon=download],     fl-input[disabled][icon=download]::before,     fl-input[disabled] fl-icon[icon=download],     fl-icon[disabled][icon=download],     fl-action[disabled][icon=download]::after     { background-image:var(--icon-download-disabled);     }
+        button[flama][disabled] > fl-icon[icon=email],        a[flama][disabled] > fl-icon[icon=email],        fl-button[disabled] > fl-icon[icon=email],        fl-input[disabled][icon=email]::before,        fl-input[disabled] fl-icon[icon=email],        fl-icon[disabled][icon=email],        fl-action[disabled][icon=email]::after        { background-image:var(--icon-email-disabled);        }
+        button[flama][disabled] > fl-icon[icon=eye-no],       a[flama][disabled] > fl-icon[icon=eye-no],       fl-button[disabled] > fl-icon[icon=eye-no],       fl-input[disabled][icon=eye-no]::before,       fl-input[disabled] fl-icon[icon=eye-no],       fl-icon[disabled][icon=eye-no],       fl-action[disabled][icon=eye-no]::after       { background-image:var(--icon-eye-no-disabled);       }
+        button[flama][disabled] > fl-icon[icon=eye],          a[flama][disabled] > fl-icon[icon=eye],          fl-button[disabled] > fl-icon[icon=eye],          fl-input[disabled][icon=eye]::before,          fl-input[disabled] fl-icon[icon=eye],          fl-icon[disabled][icon=eye],          fl-action[disabled][icon=eye]::after          { background-image:var(--icon-eye-disabled);          }
+        button[flama][disabled] > fl-icon[icon=filter],       a[flama][disabled] > fl-icon[icon=filter],       fl-button[disabled] > fl-icon[icon=filter],       fl-input[disabled][icon=filter]::before,       fl-input[disabled] fl-icon[icon=filter],       fl-icon[disabled][icon=filter],       fl-action[disabled][icon=filter]::after       { background-image:var(--icon-filter-disabled);       }
+        button[flama][disabled] > fl-icon[icon=lock],         a[flama][disabled] > fl-icon[icon=lock],         fl-button[disabled] > fl-icon[icon=lock],         fl-input[disabled][icon=lock]::before,         fl-input[disabled] fl-icon[icon=lock],         fl-icon[disabled][icon=lock],         fl-action[disabled][icon=lock]::after         { background-image:var(--icon-lock-disabled);         }
+        button[flama][disabled] > fl-icon[icon=trash],        a[flama][disabled] > fl-icon[icon=trash],        fl-button[disabled] > fl-icon[icon=trash],        fl-input[disabled][icon=trash]::before,        fl-input[disabled] fl-icon[icon=trash],        fl-icon[disabled][icon=trash],        fl-action[disabled][icon=trash]::after        { background-image:var(--icon-trash-disabled);        }
+        button[flama][disabled] > fl-icon[icon=update],       a[flama][disabled] > fl-icon[icon=update],       fl-button[disabled] > fl-icon[icon=update],       fl-input[disabled][icon=update]::before,       fl-input[disabled] fl-icon[icon=update],       fl-icon[disabled][icon=update],       fl-action[disabled][icon=update]::after       { background-image:var(--icon-update-disabled);       }
+        button[flama][disabled] > fl-icon[icon=user],         a[flama][disabled] > fl-icon[icon=user],         fl-button[disabled] > fl-icon[icon=user],         fl-input[disabled][icon=user]::before,         fl-input[disabled] fl-icon[icon=user],         fl-icon[disabled][icon=user],         fl-action[disabled][icon=user]::after         { background-image:var(--icon-user-disabled);         }
+        button[flama][disabled] > fl-icon[icon=up],           a[flama][disabled] > fl-icon[icon=up],           fl-button[disabled] > fl-icon[icon=up],           fl-input[disabled][icon=up]::before,           fl-input[disabled] fl-icon[icon=up],           fl-icon[disabled][icon=up],           fl-action[disabled][icon=up]::after           { background-image:var(--icon-up-disabled);           }
+        button[flama][disabled] > fl-icon[icon=down],         a[flama][disabled] > fl-icon[icon=down],         fl-button[disabled] > fl-icon[icon=down],         fl-input[disabled][icon=down]::before,         fl-input[disabled] fl-icon[icon=down],         fl-icon[disabled][icon=down],         fl-action[disabled][icon=down]::after         { background-image:var(--icon-down-disabled);         }
+        button[flama][disabled] > fl-icon[icon=left],         a[flama][disabled] > fl-icon[icon=left],         fl-button[disabled] > fl-icon[icon=left],         fl-input[disabled][icon=left]::before,         fl-input[disabled] fl-icon[icon=left],         fl-icon[disabled][icon=left],         fl-action[disabled][icon=left]::after         { background-image:var(--icon-left-disabled);         }
+        button[flama][disabled] > fl-icon[icon=right],        a[flama][disabled] > fl-icon[icon=right],        fl-button[disabled] > fl-icon[icon=right],        fl-input[disabled][icon=right]::before,        fl-input[disabled] fl-icon[icon=right],        fl-icon[disabled][icon=right],        fl-action[disabled][icon=right]::after        { background-image:var(--icon-right-disabled);        }
+        button[flama][disabled] > fl-icon[icon=up-small],     a[flama][disabled] > fl-icon[icon=up-small],     fl-button[disabled] > fl-icon[icon=up-small],     fl-input[disabled][icon=up-small]::before,     fl-input[disabled] fl-icon[icon=up-small],     fl-icon[disabled][icon=up-small],     fl-action[disabled][icon=up-small]::after     { background-image:var(--icon-up-small-disabled);     }
+        button[flama][disabled] > fl-icon[icon=down-small],   a[flama][disabled] > fl-icon[icon=down-small],   fl-button[disabled] > fl-icon[icon=down-small],   fl-input[disabled][icon=down-small]::before,   fl-input[disabled] fl-icon[icon=down-small],   fl-icon[disabled][icon=down-small],   fl-action[disabled][icon=down-small]::after   { background-image:var(--icon-down-small-disabled);   }
+        button[flama][disabled] > fl-icon[icon=left-small],   a[flama][disabled] > fl-icon[icon=left-small],   fl-button[disabled] > fl-icon[icon=left-small],   fl-input[disabled][icon=left-small]::before,   fl-input[disabled] fl-icon[icon=left-small],   fl-icon[disabled][icon=left-small],   fl-action[disabled][icon=left-small]::after   { background-image:var(--icon-left-small-disabled);   }
+        button[flama][disabled] > fl-icon[icon=right-small],  a[flama][disabled] > fl-icon[icon=right-small],  fl-button[disabled] > fl-icon[icon=right-small],  fl-input[disabled][icon=right-small]::before,  fl-input[disabled] fl-icon[icon=right-small],  fl-icon[disabled][icon=right-small],  fl-action[disabled][icon=right-small]::after  { background-image:var(--icon-right-small-disabled);  }
+        button[flama][disabled] > fl-icon[icon=chevron-down], a[flama][disabled] > fl-icon[icon=chevron-down], fl-button[disabled] > fl-icon[icon=chevron-down], fl-input[disabled][icon=chevron-down]::before, fl-input[disabled] fl-icon[icon=chevron-down], fl-icon[disabled][icon=chevron-down], fl-action[disabled][icon=chevron-down]::after { background-image:var(--icon-chevron-down-disabled); }
+
+        button[flama] > fl-icon[icon=add],          a[flama] > fl-icon[icon=add],         fl-button > fl-icon[icon=add],         fl-item:hover > fl-icon[icon=add],      fl-item[selected] > fl-icon[icon=add]      { background-image:var(--icon-add-white);      }
+        button[flama] > fl-icon[icon=calendar],     a[flama] > fl-icon[icon=calendar],    fl-button > fl-icon[icon=calendar],    fl-item:hover > fl-icon[icon=calendar], fl-item[selected] > fl-icon[icon=calendar] { background-image:var(--icon-calendar-white); }
+        button[flama] > fl-icon[icon=cog],          a[flama] > fl-icon[icon=cog],         fl-button > fl-icon[icon=cog],         fl-item:hover > fl-icon[icon=cog],      fl-item[selected] > fl-icon[icon=cog]      { background-image:var(--icon-cog-white);      }
+        button[flama] > fl-icon[icon=delete],       a[flama] > fl-icon[icon=delete],      fl-button > fl-icon[icon=delete],      fl-item:hover > fl-icon[icon=delete],   fl-item[selected] > fl-icon[icon=delete]   { background-image:var(--icon-delete-white);   }
+        button[flama] > fl-icon[icon=dots],         a[flama] > fl-icon[icon=dots],        fl-button > fl-icon[icon=dots],        fl-item:hover > fl-icon[icon=dots],     fl-item[selected] > fl-icon[icon=dots]     { background-image:var(--icon-dots-white);     }
+        button[flama] > fl-icon[icon=docs],         a[flama] > fl-icon[icon=docs],        fl-button > fl-icon[icon=docs],        fl-item:hover > fl-icon[icon=docs],     fl-item[selected] > fl-icon[icon=docs]     { background-image:var(--icon-docs-white);     }
+        button[flama] > fl-icon[icon=download],     a[flama] > fl-icon[icon=download],    fl-button > fl-icon[icon=download],    fl-item:hover > fl-icon[icon=download], fl-item[selected] > fl-icon[icon=download] { background-image:var(--icon-download-white); }
+        button[flama] > fl-icon[icon=email],        a[flama] > fl-icon[icon=email],       fl-button > fl-icon[icon=email],       fl-item:hover > fl-icon[icon=email],    fl-item[selected] > fl-icon[icon=email]    { background-image:var(--icon-email-white);    }
+        button[flama] > fl-icon[icon=eye-no],       a[flama] > fl-icon[icon=eye-no],      fl-button > fl-icon[icon=eye-no],      fl-item:hover > fl-icon[icon=eye-no],   fl-item[selected] > fl-icon[icon=eye-no]   { background-image:var(--icon-eye-no-white);   }
+        button[flama] > fl-icon[icon=eye],          a[flama] > fl-icon[icon=eye],         fl-button > fl-icon[icon=eye],         fl-item:hover > fl-icon[icon=eye],      fl-item[selected] > fl-icon[icon=eye]      { background-image:var(--icon-eye-white);      }
+        button[flama] > fl-icon[icon=filter],       a[flama] > fl-icon[icon=filter],      fl-button > fl-icon[icon=filter],      fl-item:hover > fl-icon[icon=filter],   fl-item[selected] > fl-icon[icon=filter]   { background-image:var(--icon-filter-white);   }
+        button[flama] > fl-icon[icon=lock],         a[flama] > fl-icon[icon=lock],        fl-button > fl-icon[icon=lock],        fl-item:hover > fl-icon[icon=lock],     fl-item[selected] > fl-icon[icon=lock]     { background-image:var(--icon-lock-white);     }
+        button[flama] > fl-icon[icon=trash],        a[flama] > fl-icon[icon=trash],       fl-button > fl-icon[icon=trash],       fl-item:hover > fl-icon[icon=trash],    fl-item[selected] > fl-icon[icon=trash]    { background-image:var(--icon-trash-white);    }
+        button[flama] > fl-icon[icon=update],       a[flama] > fl-icon[icon=update],      fl-button > fl-icon[icon=update],      fl-item:hover > fl-icon[icon=update],   fl-item[selected] > fl-icon[icon=update]   { background-image:var(--icon-update-white);   }
+        button[flama] > fl-icon[icon=user],         a[flama] > fl-icon[icon=user],        fl-button > fl-icon[icon=user],        fl-item:hover > fl-icon[icon=user],     fl-item[selected] > fl-icon[icon=user]     { background-image:var(--icon-user-white);     }
+        button[flama] > fl-icon[icon=up],           a[flama] > fl-icon[icon=up],          fl-button > fl-icon[icon=up],          fl-item:hover > fl-icon[icon=up],       fl-item[selected] > fl-icon[icon=up]       { background-image:var(--icon-up-white);       }
+        button[flama] > fl-icon[icon=down],         a[flama] > fl-icon[icon=down],        fl-button > fl-icon[icon=down],        fl-item:hover > fl-icon[icon=down],     fl-item[selected] > fl-icon[icon=down]     { background-image:var(--icon-down-white);     }
+        button[flama] > fl-icon[icon=left],         a[flama] > fl-icon[icon=left],        fl-button > fl-icon[icon=left],        fl-item:hover > fl-icon[icon=left],     fl-item[selected] > fl-icon[icon=left]     { background-image:var(--icon-left-white);     }
+        button[flama] > fl-icon[icon=right],        a[flama] > fl-icon[icon=right],       fl-button > fl-icon[icon=right],       fl-item:hover > fl-icon[icon=right],    fl-item[selected] > fl-icon[icon=right]    { background-image:var(--icon-right-white);    }
+        button[flama] > fl-icon[icon=up-small],     a[flama] > fl-icon[icon=up-small],    fl-button > fl-icon[icon=up-small],    fl-item:hover > fl-icon[icon=up-small],    fl-item[selected] > fl-icon[icon=up-small]    { background-image:var(--icon-up-small-white);    }
+        button[flama] > fl-icon[icon=down-small],   a[flama] > fl-icon[icon=down-small],  fl-button > fl-icon[icon=down-small],  fl-item:hover > fl-icon[icon=down-small],  fl-item[selected] > fl-icon[icon=down-small]  { background-image:var(--icon-down-small-white);  }
+        button[flama] > fl-icon[icon=left-small],   a[flama] > fl-icon[icon=left-small],  fl-button > fl-icon[icon=left-small],  fl-item:hover > fl-icon[icon=left-small],  fl-item[selected] > fl-icon[icon=left-small]  { background-image:var(--icon-left-small-white);  }
+        button[flama] > fl-icon[icon=right-small],  a[flama] > fl-icon[icon=right-small], fl-button > fl-icon[icon=right-small], fl-item:hover > fl-icon[icon=right-small], fl-item[selected] > fl-icon[icon=right-small] { background-image:var(--icon-right-small-white); }
+        button[flama] > fl-icon[icon=chevron-down], a[flama] > fl-icon[icon=chevron-down], fl-button > fl-icon[icon=chevron-down], fl-item:hover > fl-icon[icon=chevron-down], fl-item[selected] > fl-icon[icon=chevron-down] { background-image:var(--icon-chevron-down-white); }
+
+    fl-dropdown {
+        margin-top:-5px;
+        overflow:auto;
+        max-height:200px;
+        display:flex;
+        flex-direction:column;
+        z-index:1000;
+        border-bottom:var(--border) solid var(--color-secundary);
+        padding:var(--spacing);
+        transition:var(--transition);
+        margin-top:-+10px;
+        opacity:0;
+        pointer-events:none;
+        background-color: var(--color-clear);
+    }
+    
+    fl-action > fl-list {
+        position:absolute;
+        right:0;
+        top:50%;
+        padding:var(--spacing);
+        z-index:1000;
+        border-radius:var(--round-input);
+        border:var(--border) solid var(--color-clear-border);
+        transition:var(--transition);
+        margin-top:10px;
+        opacity:0;
+        pointer-events:none;
+    }
+    fl-action[right] > fl-list {
+        right:auto;
+        left:0;
+    }
+    fl-action[left] > fl-list {
+        right:0;
+        left:auto;
+    }
+    fl-action[up] > fl-list {
+        top:auto;
+        bottom:50%;
+        margin-top:auto;
+        margin-bottom:10px;
+    }
+    fl-action:focus > fl-list {
+        margin-top:0;
+        margin-bottom:0;
+        opacity:1;
+        pointer-events:all;
+    }
+
+    *:has(>fl-select) > fl-dropdown,
+    fl-input > fl-dropdown {
+        position:absolute;
+        left:0;
+        right:0;
+        top:100%;
+    }
+
+    *:has(>fl-select) > fl-dropdown,
+    fl-action > fl-list {
+        border:0;
+        border-radius:0 0 var(--round-input) var(--round-input);
+        box-shadow:var(--shadow);
+    }
+
+        *:has(>input:focus) > fl-dropdown,
+        fl-action:focus > fl-list,
+        fl-select:focus + fl-dropdown,
+        fl-dropdown[visible],
+        fl-dropdown:hover {
+            margin-top:0;
+            opacity:1;
+            pointer-events:all;
+        }
+
+    fl-list {
+        background-color:var(--color-clear);
+        display:flex;
+        flex-direction:column;
+        gap:var(--spacing)
+    }
+        fl-dropdown > fl-list {
+            height:100%;
+            overflow:auto;
+        }
+    fl-item {
+        display:flex;
+        flex-direction:row;
+        align-items:center;
+        padding:var(--space-vertical-small) var(--space-horizontal-small);
+        border-radius:var(--round-input);
+        color:var(--color-clear-text);
+        cursor:pointer;
+        white-space:nowrap;
+        gap:var(--spacing);
+    }
+        fl-item:has(fl-icon){
+            padding:var(--space-vertical-small);
+        }
+        fl-item:hover,
+        fl-item[selected] {
+            background-color:var(--color-hover);
+            color:var(--color-hover-text);
+        }
+        fl-list[basic] fl-item {
+            border-radius:0;
+            border-bottom:var(--border) solid var(--color-clear-border);
+        }
+        fl-list[basic] fl-item:last-child {
+            border-bottom-width:0;
+        }
+        fl-list[basic] fl-item:hover,
+        fl-list[basic] fl-item[selected] {
+            background-color:transparent;
+            color:var(--color-clear-text);
+        }
+
+fl-getnet,
+[fl-getnet] {
+    display:inline-block;
+    background:no-repeat center center url('./img/getnet.svg');
+    background-size:contain;
+    width:90px;
+    height:20px;
+}
+    fl-getnet[size=small],
+    [fl-getnet][size=small] {
+        width:90px;
+        height:20px;
+    }
+    fl-getnet[size=big],
+    [fl-getnet][size=big] {
+        width:226px;
+        height:48px;
+    }
+
+fl-title {
+    display:block;
+    font-family:var(--font);
+    color:var(--color-clear-text);
+    font-size:var(--font-size-xl);
+    font-weight:bold;
+}
+    fl-title::after {
+        display:block;
+        content:"";
+        background-color:var(--color-primary);
+        margin-top:24px;
+        height:4px;
+        width:40px;
+    }
+    fl-title[clear]::after {
+        opacity:0; 
+    }
+
+fl-subtitle {
+    display:block;
+    font-family:var(--font);
+    color:var(--color-clear-text);
+    font-size:var(--font-size-large);
+    font-weight:bold;
+}
+
+    fl-title > a,
+    fl-subtitle > a {
+        color:var(--color-primary)
+    }
+
+fl-input input[type=number] {
+  	--moz-appearance:textfield;
+}
+fl-input, 
+fl-input *,
+fl-section *,
+fl-actions *,
+fl-action * { 
+	text-decoration:none;
+	list-style:none;
+	appearance:none;
+	-webkit-appearance:none;
+	font-style:normal;
+	resize:none;
+    outline:none;
+    margin-block-start:0;
+    margin-block-end:0;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance:none;
+	margin:0;
+}
+input[type="search"]::-webkit-search-cancel-button  {
+    display: none;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    cursor: pointer;
+}
+input::placeholder,
+textarea::placeholder {
+    color: rgba(0,0,0,0);
+    opacity: 0;
+}
+[compact] > input::placeholder,
+[compact] > textarea::placeholder {
+    color: #ccc !important;
+    opacity: 1 !important;
+}
+
+@font-face {
+    font-family: 'Santander';
+    src: url('./font/SantanderMicroText.otf');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
