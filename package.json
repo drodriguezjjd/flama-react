@@ -7,6 +7,13 @@
   "main": "./dist/flama-react.cjs.js",
   "module": "./dist/flama-react.es.js",
 
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.cjs.js"
+    }
+  },
+
   "files": ["dist"],
 
   "scripts": {

@@ -8,7 +8,8 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, 'src/lib/index.js'),
       name: 'FlamaReact',
-      fileName: (format) => `flama-react.${format}.js`
+      formats: ['es', 'cjs'],
+      fileName: (format) => `index.${format}.js`
     },
     rollupOptions: {
       external: ['react', 'react-dom'],
