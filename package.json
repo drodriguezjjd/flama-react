@@ -1,29 +1,37 @@
 {
   "name": "flama-react",
   "version": "1.0.0",
-  "description": "Librería de componentes React basada en Flama CSS — UI declarativa con custom elements y atributos semánticos",
+  "description": "Librería de componentes React basada en Flama CSS",
   "type": "module",
+
+  "main": "./dist/flama-react.cjs.js",
+  "module": "./dist/flama-react.es.js",
+
+  "files": ["dist"],
+
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "build:lib": "vite build --config vite.lib.config.js"
+    "build": "vite build --config vite.lib.config.js"
   },
-  "dependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+
+  "peerDependencies": {
+    "react": "^18",
+    "react-dom": "^18"
   },
+
   "devDependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.1",
     "vite": "^5.4.2"
   },
+
   "keywords": [
     "react",
     "ui",
-    "components",
-    "flama",
-    "design-system"
+    "design-system",
+    "flama"
   ],
-  "author": "Diego Rodriguez <diego.rodriguez.gomez@gmail.com>",
+  "author": "Diego Rodriguez",
   "license": "MIT"
 }
