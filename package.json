@@ -1,7 +1,7 @@
 {
   "name": "flama-react",
   "version": "1.0.0",
-  "description": "Librería de componentes React basada en Flama CSS",
+  "description": "Librería de componentes React basada en Flama CSS.",
   "type": "module",
 
   "main": "./dist/flama-react.cjs.js",
@@ -15,8 +15,8 @@
   },
 
   "peerDependencies": {
-    "react": "^18",
-    "react-dom": "^18"
+    "react": ">=18",
+    "react-dom": ">=18"
   },
 
   "devDependencies": {
